@@ -1,26 +1,21 @@
 from ast import literal_eval
 import csv
 
-# def read_data():
-#     data = []
-#     with open('sales.csv', 'r') as sales_csv:
-#         spreadsheet = csv.DictReader(sales_csv)
-#         for row in spreadsheet:
-#             data.append(row)
-#         return data
+## Use Netflix data file to create a program where the user can enter a year and a genre and receive a list of all relevant films and their IMDB ratings.
 
-# def run():
-#     data = read_data()
-#     sales = []
-#     for row in data:
-#         sale = int(row['sales'])
-#         month = str(row['month'])
-#         sales.append(sale)
-#         total = sum(sales)
-#         print('Total sales for {}: {}'.format(month, sale))
-#     print('Total sales for this year: {}'.format(total))
+## DONE 1. import packages/libraries
 
+## DONE 2. define function to get data from spreadsheet (titles.csv) using csv.DictReader() & append rows to the data dictionary - only 'MOVIE' type
 
+## DONE 3. ask user to choose a genre from a list (retrieved from the csv file ('genres' column)) - STRETCH for films with multiple genres, pick the first genre from the list & store in variable
+
+## DONE 4. ask user for the year they want to search & store in variable
+
+## DONE 5. then retrieve title, imdb score, runtime & display in a list
+
+## DONE 6. once the user chooses a film, show them the description
+
+print('\nHello! Time to choose a film.\n')
 
 def read_all_data(): 
     data = []
@@ -30,18 +25,17 @@ def read_all_data():
             data.append(row)
         return data
 
-selected_genre = raw_input('Choose a genre from action, animation, comedy, crime, documentary, drama, fantasy, family, horror, music, romance, thriller\n')
+ 
+all_genres = ['action', 'animation', 'comedy', 'crime', 'documentary', 'drama', 'fantasy', 'family', 'horror', 'music', 'romance', 'thriller']
+
+selected_genre = raw_input('Please choose a genre from: action, animation, comedy, crime, documentary, drama, fantasy, family, horror, music, romance, thriller\n')
 
 selected_year = input('Choose a year from 1960 - 2021.\n')
-
-# all_data = read_all_data()
-
-# print(all_data[345])
 
 selected_movies = []
 
 def get_movies():
-    print('Searching for ' + selected_genre + ' films from ' + str(selected_year) + ':')
+    print('Searching for ' + selected_genre + ' films from ' + str(selected_year) + '.\n')
     all_movies = read_all_data()
     for row in all_movies:
         title = str(row['title'])
@@ -56,9 +50,9 @@ def get_movies():
     return selected_movies
 
 get_movies()
- 
+
 def show_movies():
-    print('The following movies were found:\n')
+    print('The following films were found:\n')
     for movie in selected_movies:
         print('Title: ' + movie['title'])
         print('Runtime: ' + movie['runtime'] + ' minutes')
@@ -66,28 +60,16 @@ def show_movies():
 
 show_movies()
 
-selected_movie = input('Choose one of the films above to see the description. Please make sure to get the title exact.\n')
+selected_movie = raw_input('Choose one of the films above to see the description. Please make sure to get the title exact.\n\n')
+
+print('\nYou chose "' + str(selected_movie) + '". The description of that film is: \n')
 
 def show_description():
-    print(selected_movie)
     for movie in selected_movies:
-        print(movie['title'])
         if selected_movie == movie['title']:
-            print(movie['description'])
+            print(movie['description'] + '\n\n')
 
 show_description()
 
-## Use Netflix data file to create a program where the user can enter a year and a genre and receive a list of all relevant films and their IMDB ratings.
-
-## DONE 1. import packages/libraries
-
-## DONE 2. define function to get data from spreadsheet (titles.csv) using csv.DictReader() & append rows to the data dictionary - only 'MOVIE' type
-
-## DONE 3. ask user to choose a genre from a list (retrieved from the csv file ('genres' column)) - STRETCH for films with multiple genres, pick the first genre from the list & store in variable
-
-## DONE 4. ask user for the year they want to search & store in variable
-
-## DONE 5. then retrieve title, imdb score, runtime & display in a list
-
-## 6. once the user chooses a film, show them the description
+print('Enjoy the film!\n')
 
